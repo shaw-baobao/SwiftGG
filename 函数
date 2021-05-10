@@ -17,4 +17,21 @@ func minMax(array: [Int]) -> (min: Int, max: Int) {
 //元组的成员值已被命名，因此可以通过 . 语法来检索找到的最小值与最大值：
 let bounds = minMax(array: [8, -6, 2, 109, 3, 71])
 print("min is \(bounds.min) and max is \(bounds.max)")
-// 打印“min is -6 and max is 109”
+
+
+
+
+//计算一组任意长度数字的 算术平均数（arithmetic mean)：
+func arithmeticMean(_ numbers: Double...) -> Double {
+    var total: Double = 0
+    for number in numbers {
+        total += number
+    }
+    return total / Double(numbers.count)
+}
+arithmeticMean(1, 2, 3, 4, 5)
+// 返回 3.0, 是这 5 个数的平均数。
+arithmeticMean(3, 8.25, 18.75)
+// 返回 10.0, 是这 3 个数的平均数。
+
+
