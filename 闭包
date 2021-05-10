@@ -1,1 +1,11 @@
-
+sorted(by:) 方法接受一个闭包，该闭包函数需要传入与数组元素类型相同的两个值，并返回一个布尔类型值来表明当排序结束后传入的第一个参数排在第二个参数前面还是后面。
+如果第一个参数值出现在第二个参数值前面，排序闭包函数需要返回 true，反之返回 false。
+该例子对一个 String 类型的数组进行排序，因此排序闭包函数类型需为 (String, String) -> Bool。
+提供排序闭包函数的一种方式是撰写一个符合其类型要求的普通函数，并将其作为 sorted(by:) 方法的参数传入：
+func backward(_ s1: String, _ s2: String) -> Bool {
+    return s1 > s2
+}
+var reversedNames = names.sorted(by: backward)
+// reversedNames 为 ["Ewa", "Daniella", "Chris", "Barry", "Alex"]
+如果第一个字符串（s1）大于第二个字符串（s2），backward(_:_:) 函数会返回 true，表示在新的数组中 s1 应该出现在 s2 前。对于字符串中的字符来说，“大于”表示“按照字母顺序较晚出现”。
+这意味着字母 "B" 大于字母 "A" ，字符串 "Tom" 大于字符串 "Tim"。该闭包将进行字母逆序排序，"Barry" 将会排在 "Alex" 之前。
