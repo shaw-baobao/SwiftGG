@@ -95,3 +95,10 @@ print("The status message is \(http200Status.description)")
 
 可选类型
 使用可选类型（optionals）来处理值可能缺失的情况。可选类型表示两种可能： 或者有值， 你可以解析可选类型访问这个值， 或者根本没有值。
+
+nil
+你可以给可选变量赋值为 nil 来表示它没有值：
+var serverResponseCode: Int? = 404
+// serverResponseCode 包含一个可选的 Int 值 404
+serverResponseCode = nil
+// serverResponseCode 现在不包含值
