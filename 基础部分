@@ -1,0 +1,97 @@
+声明常量和变量
+常量和变量必须在使用前声明，用 let 来声明常量，用 var 来声明变量。如果你的代码中有不需要改变的值，请使用 let 关键字将它声明为常量。只将需要改变的值声明为变量。
+你可以在一行中声明多个常量或者多个变量，用逗号隔开：var x = 0.0, y = 0.0, z = 0.0
+
+类型注解（type annotation）
+当你声明常量或者变量的时候可以加上类型注解，说明常量或者变量中要存储的值的类型。如果要添加类型注解，需要在常量或者变量名后面加上一个冒号和空格，然后加上类型名称。
+var welcomeMessage: String
+你可以在一行中定义多个同样类型的变量，用逗号分割，并在最后一个变量名之后添加类型注解：
+var red, green, blue: Double
+一般来说你很少需要写类型注解。
+
+常量和变量的命名
+
+输出常量和变量
+你可以用 print(_:separator:terminator:) 函数来输出当前常量或变量的值:separator 和 terminator 参数具有默认值，因此你调用这个函数的时候可以忽略它们。
+默认情况下，该函数通过添加换行符来结束当前行。如果不想换行，可以传递一个空字符串给 terminator 参数--例如，print(someValue, terminator:"") 。
+
+注释
+单行注释以双正斜杠（//）作为起始标记:
+// 这是一个注释
+你也可以进行多行注释，其起始标记为单个正斜杠后跟随一个星号（/*），终止标记为一个星号后跟随单个正斜杠（*/）:
+/* 这是第一个多行注释的开头
+/* 这是第二个被嵌套的多行注释 */
+这是第一个多行注释的结尾 */
+
+分号
+与其他大部分编程语言不同，Swift 并不强制要求你在每条语句的结尾处使用分号（;）
+
+数值型字面量
+整数字面量可以被写作：
+一个十进制数，没有前缀
+一个二进制数，前缀是 0b
+一个八进制数，前缀是 0o
+一个十六进制数，前缀是 0x
+如果一个十进制数的指数为 exp，那这个数相当于基数和10^exp 的乘积：
+1.25e2 表示 1.25 × 10^2，等于 125.0。
+1.25e-2 表示 1.25 × 10^-2，等于 0.0125。
+如果一个十六进制数的指数为 exp，那这个数相当于基数和2^exp 的乘积：
+0xFp2 表示 15 × 2^2，等于 60.0。
+0xFp-2 表示 15 × 2^-2，等于 3.75。
+
+数值型类型转换
+
+
+类型别名
+类型别名（type aliases）就是给现有类型定义另一个名字。你可以使用 typealias 关键字来定义类型别名。
+当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：
+typealias AudioSample = UInt16
+定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：
+var maxAmplitudeFound = AudioSample.min
+// maxAmplitudeFound 现在是 0
+本例中，AudioSample 被定义为 UInt16 的一个别名。因为它是别名，AudioSample.min 实际上是 UInt16.min，所以会给 maxAmplitudeFound 赋一个初值 0。
+
+布尔值
+Swift 有一个基本的布尔（Boolean）类型，叫做 Bool。布尔值指逻辑上的值，因为它们只能是真或者假。Swift 有两个布尔常量，true 和 false：
+当你编写条件语句比如 if 语句的时候，布尔值非常有用：
+let orangesAreOrange = true
+let turnipsAreDelicious = false
+if turnipsAreDelicious {
+    print("Mmm, tasty turnips!")
+} else {
+    print("Eww, turnips are horrible.")
+}
+// 输出“Eww, turnips are horrible.”
+
+元组
+元组（tuples）把多个值组合成一个复合值。元组内的值可以是任意类型，并不要求是相同类型。
+你可以把任意顺序的类型组合成一个元组，这个元组可以包含所有类型。只要你想，你可以创建一个类型为 (Int, Int, Int) 或者 (String, Bool) 或者其他任何你想要的组合的元组。
+你可以将一个元组的内容分解（decompose）成单独的常量和变量，然后你就可以正常使用它们了：
+如果你只需要一部分元组值，分解的时候可以把要忽略的部分用下划线（_）标记：
+let http404Error = (404, "Not Found")
+// http404Error 的类型是 (Int, String)，值是 (404, "Not Found")
+let (statusCode, statusMessage) = http404Error
+print("The status code is \(statusCode)")
+// 输出“The status code is 404”
+print("The status message is \(statusMessage)")
+// 输出“The status message is Not Found”
+let (justTheStatusCode, _) = http404Error
+print("The status code is \(justTheStatusCode)")
+// 输出“The status code is 404”
+此外，你还可以通过下标来访问元组中的单个元素，下标从零开始
+print("The status code is \(http404Error.0)")
+// 输出“The status code is 404”
+print("The status message is \(http404Error.1)")
+// 输出“The status message is Not Found”
+你可以在定义元组的时候给单个元素命名：
+let http200Status = (statusCode: 200, description: "OK")
+给元组中的元素命名后，你可以通过名字来获取这些元素的值：
+print("The status code is \(http200Status.statusCode)")
+// 输出“The status code is 200”
+print("The status message is \(http200Status.description)")
+// 输出“The status message is OK”
+作为函数返回值时，元组非常有用。
+当遇到一些相关值的简单分组时，元组是很有用的。元组不适合用来创建复杂的数据结构。如果你的数据结构比较复杂，不要使用元组，用类或结构体去建模。
+
+可选类型
+使用可选类型（optionals）来处理值可能缺失的情况。可选类型表示两种可能： 或者有值， 你可以解析可选类型访问这个值， 或者根本没有值。
