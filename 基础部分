@@ -102,3 +102,8 @@ var serverResponseCode: Int? = 404
 // serverResponseCode 包含一个可选的 Int 值 404
 serverResponseCode = nil
 // serverResponseCode 现在不包含值
+
+你可以使用 if 语句和 nil 比较来判断一个可选值是否包含值。你可以使用“相等”(==)或“不等”(!=)来执行比较。
+如果可选类型有值，它将不等于 nil：
+
+一个十六进制数，前缀是 0x
